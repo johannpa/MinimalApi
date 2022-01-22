@@ -23,7 +23,7 @@ var summaries = new[]
     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 };
 
-// Cars endpoints
+#region Cars endpoints
 
 app.MapGet("api/cars", () =>
 {
@@ -82,7 +82,10 @@ app.MapDelete("api/cars/{id}",
     .WithName("DeleteCar")
     .WithTags("Cars");
 
-//Motorbikes endpoints
+#endregion
+
+
+#region Motorbikes endpoints
 
 app.MapGet("api/motorbikes", () =>
 {
@@ -141,8 +144,10 @@ app.MapDelete("api/motorbikes/{id}",
     .WithName("DeleteMotorbike")
     .WithTags("Motorbikes");
 
-//Default endpoints
+#endregion
 
+
+#region Default endpoints
 app.MapGet("/weatherforecast", () =>
 {
     var forecast = Enumerable.Range(1, 5).Select(index =>
@@ -157,11 +162,12 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithTags("Default");
+#endregion
 
 app.Run();
 
 //Models
-
+#region Models
 internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
 {
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
@@ -190,3 +196,5 @@ public record Motorbike
     public bool FinishedRace { get; set; }
     public int RacedForHours { get; set; }
 }
+
+#endregion
